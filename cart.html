@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+  <h1>Your Cart</h1>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.description }}</td>
+          <td>${{ item.product.price }}</td>
+          <td>
+            <input type="number" name="quantity-{{ item.product.id }}" value="{{ item.quantity }}" min="1" required>
+          </td>
+          <td>
+            <button type="submit" formaction="{{ url_for('views.remove_from_cart', product_id=item.product.id) }}" class="btn btn-danger">Remove</button>
+          </td>
+        </tr>
+      {% endfor %}      
+      </tbody>
+    </table>
+    <button type="submit" formaction="{{ url_for('views.place_order') }}" class="btn btn-primary">Place Order</button>
+    <button type="submit" formaction="{{ url_for('views.cart') }}" class="btn btn-secondary">Update Cart</button>
+  </form>
+{% endblock %}

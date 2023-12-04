@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Two Factor Authentication</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.otp.label }}: {{ form.otp }}
+        {{ form.submit() }}
+    </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Product{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <h3>${{ product.price }}</h3>
+      <form method="post" action="{{ url_for('views.add_to_cart', product_id=product.id) }}">
+        <input type="submit" value="Add to Cart" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+{% endblock %}
